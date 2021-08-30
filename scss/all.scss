@@ -170,8 +170,6 @@ body {
     }
 }
 @include mobile(){
-    height: 100%;
-    background-attachment:scroll;
     .burgar_btn{
         padding-right:20px;
         font-size: 25px;
