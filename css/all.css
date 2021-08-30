@@ -8,6 +8,10 @@ body {
   background-attachment: fixed;
 }
 
+.burgar_btn {
+  display: none;
+}
+
 .navbar {
   background-color: #9146FF;
   display: -webkit-box;
@@ -45,11 +49,24 @@ body {
   padding: 0 10px;
 }
 
+@media (max-width: 598px) {
+  .navbar .input input {
+    width: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
 .navbar .input input:focus {
   width: 300px;
   outline: none;
   border: 3px solid #6931be;
   background-color: #f0f0f0;
+}
+
+.navbar .input input:focus {
+  width: 150px;
 }
 
 .navbar .input a {
@@ -191,5 +208,20 @@ body {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+@media (max-width: 598px) {
+  .burgar_btn {
+    padding-right: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    display: block;
+  }
+  .nav-front {
+    display: none;
+  }
+  .icon {
+    display: none;
+  }
 }
 /*# sourceMappingURL=all.css.map */
