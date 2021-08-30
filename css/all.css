@@ -211,7 +211,8 @@ body {
 }
 
 @media (max-width: 598px) {
-  background-size: cover;
+  height: 100%;
+  background-attachment: scroll;
   .burgar_btn {
     padding-right: 20px;
     font-size: 25px;
