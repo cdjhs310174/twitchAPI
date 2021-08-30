@@ -1,0 +1,148 @@
+@import "reset";
+@import "variable";
+body {
+    background: url("https://lolstatic-a.akamaihd.net/lolkit/1.1.6/resources/images/bg-default.jpg") no-repeat center;
+    background-attachment: fixed;
+}
+.navbar{
+    background-color: #9146FF;
+    display: flex;
+    color: white;
+    align-items: center;
+
+    .logo{
+        img{
+            width: 70px;
+        }
+    }
+    .input{
+        display: flex;
+        margin: auto;
+        align-items: center;
+        input{
+            background-color: rgb(224, 224, 224);
+            width: 130px;
+            height: 30px;
+            border-radius: 20px;
+            border: 2px solid rgb(126, 126, 126);
+            transition: .5s;
+            margin-right: 5px;
+            padding:0 10px;
+            &:focus{
+                width: 300px;
+                outline:none;
+                border: 3px solid #6931be;
+                background-color: rgb(240, 240, 240);
+            }
+        }
+        a{
+            color:white
+        }
+    }
+    .nav-front{
+        a{
+            font-size: 17px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            transition: .7s;
+            &:hover{
+                color:black;
+            }
+        }
+        .point{
+            writing-mode: vertical-lr;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+    .icon{
+        a{
+            margin: auto;
+            font-size: 19px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            transition: .7s;
+            &:hover{
+                color:black;
+            }
+        }
+        .buy{
+            &:hover{
+                color:black;
+            }
+        }
+    }
+}
+.container {
+    background-color: $halfBlack;
+    .row {
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.item {
+    width: 300px;
+    height: 230px;
+    margin: 20px 60px;
+    transition: .5s;
+    &:hover {
+        box-shadow: $halfBlack 5px 5px 10px 10px;
+        filter: brightness(1.5);
+        transform: scale(1.1)
+    }
+    a {
+        &:link {
+            text-decoration: none;
+        }
+        &:visited {
+            text-decoration: none;
+        }
+        &:active {
+            text-decoration: none;
+        }
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    .top {
+        width: $fullWidth;
+        img {
+            vertical-align: bottom;
+            width: $fullWidth;
+        }
+    }
+    .bottom {
+        width: $fullWidth;
+        display: flex;
+        color: white;
+        align-items: center;
+        background-color: $halfBlack;
+        img {
+            padding: 5px;
+            border-radius: 50%;
+        }
+        .text {
+            width: $fullWidth;
+            margin-left: 10px;
+            .personName {
+                width: 230px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            .channelName {
+                width: 230px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}

@@ -1,0 +1,195 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url("https://lolstatic-a.akamaihd.net/lolkit/1.1.6/resources/images/bg-default.jpg") no-repeat center;
+  background-attachment: fixed;
+}
+
+.navbar {
+  background-color: #9146FF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: white;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar .logo img {
+  width: 70px;
+}
+
+.navbar .input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar .input input {
+  background-color: #e0e0e0;
+  width: 130px;
+  height: 30px;
+  border-radius: 20px;
+  border: 2px solid #7e7e7e;
+  -webkit-transition: .5s;
+  transition: .5s;
+  margin-right: 5px;
+  padding: 0 10px;
+}
+
+.navbar .input input:focus {
+  width: 300px;
+  outline: none;
+  border: 3px solid #6931be;
+  background-color: #f0f0f0;
+}
+
+.navbar .input a {
+  color: white;
+}
+
+.navbar .nav-front a {
+  font-size: 17px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  -webkit-transition: .7s;
+  transition: .7s;
+}
+
+.navbar .nav-front a:hover {
+  color: black;
+}
+
+.navbar .nav-front .point {
+  -webkit-writing-mode: vertical-lr;
+      -ms-writing-mode: tb-lr;
+          writing-mode: vertical-lr;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navbar .icon a {
+  margin: auto;
+  font-size: 19px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  -webkit-transition: .7s;
+  transition: .7s;
+}
+
+.navbar .icon a:hover {
+  color: black;
+}
+
+.navbar .icon .buy:hover {
+  color: black;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.container .row {
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.item {
+  width: 300px;
+  height: 230px;
+  margin: 20px 60px;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.item:hover {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 10px 10px;
+          box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 10px 10px;
+  -webkit-filter: brightness(1.5);
+          filter: brightness(1.5);
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.item a:link {
+  text-decoration: none;
+}
+
+.item a:visited {
+  text-decoration: none;
+}
+
+.item a:active {
+  text-decoration: none;
+}
+
+.item a:hover {
+  text-decoration: none;
+}
+
+.item .top {
+  width: 100%;
+}
+
+.item .top img {
+  vertical-align: bottom;
+  width: 100%;
+}
+
+.item .bottom {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: white;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.item .bottom img {
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.item .bottom .text {
+  width: 100%;
+  margin-left: 10px;
+}
+
+.item .bottom .text .personName {
+  width: 230px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.item .bottom .text .channelName {
+  width: 230px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/*# sourceMappingURL=all.css.map */

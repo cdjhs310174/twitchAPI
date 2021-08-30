@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ed8febe00f.js" crossorigin="anonymous"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="https://www.freepnglogos.com/pics/twitch-logo-png" title="Image from freepnglogos.com">
+                <img src="https://www.freepnglogos.com/uploads/twitch-app-logo-png-3.png"  alt="twitch app logo png" />
+            </a>
+        </div>
+        <div class="nav-front">
+            <a href="">追隨中</a>
+            <a href="">瀏覽</a>
+            <a href="">電競</a>
+            <a href="">音樂</a>
+            <a href="" class="point">...</a>
+        </div>
+        <div class="input">
+            <input type="text" size="30" placeholder="您想要觀賞什麼內容?">
+            <div class="search">
+                <a href="">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+        </div>
+        <div class="icon">
+            <a href=""><i class="fas fa-paper-plane"></i></a>
+            <a href=""><i class="fas fa-envelope-open"></i></a>
+            <a href="" class="buy">購買小奇點</a>
+            <a href=""><i class="fas fa-user"></i></a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <!-- <div class="item">
+                <div class="top">
+                    <img src="" alt="">
+                </div>
+                <div class="bottom">
+                    <img src="https://fakeimg.pl/50x50/">
+                    <div class="text">
+                        <div class="channelName">頻道名稱</div>
+                        <div class="personName">實況主名字</div>
+                    </div>
+                </div>
+            </div>
+            -->
+
+        </div>
+    </div>
+    <script>
+        let xmlHttp //連接API
+        let userIdArrPlus = 0 //logo 陣列的index
+        let streamsUrl = 'https://api.twitch.tv/helix/streams?game_id=21779'
+        const gameId = 21779
+        const logoUrlArr = []
+
+        function loadXml(url, clientId, Authorization) { //發出request
+            xmlHttp = new XMLHttpRequest()
+            xmlHttp.open('GET', url)
+            xmlHttp.setRequestHeader('Client-ID', clientId)
+            xmlHttp.setRequestHeader('Authorization', Authorization)
+            xmlHttp.send()
+        }
+
+        function getData(cb) { //拿到資料後執行callback fn
+            xmlHttp.onload = function() {
+                if (xmlHttp.status >= 200 && xmlHttp.status < 400) {
+                    let response = JSON.parse(xmlHttp.response)
+                    cb(response)
+                } else {
+                    console.log('error')
+                }
+            }
+        }
+
+
+        function getColumn(data, index, loginrl) { //把拿到的東西塞進去
+            let previewUrl = data[index].thumbnail_url.replace('{width}', '300').replace('{height}', '169')
+            let channelName = data[index].title
+            let userName = data[index].user_name
+            let userId = data[index].user_id
+
+            return `
+                <div class="item">
+                    <a href="https://www.twitch.tv/${loginrl}">
+                        <div class="box">
+                            <div class="top">
+                                <img src=" ${previewUrl}" alt="">
+                            </div>
+                            <div class="bottom">
+                                <img class="logo" >
+                                <div class="text">
+                                    <div class="channelName">${channelName}</div>
+                                    <div class="personName">${userName}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            `
+        }
+
+        function getLogo(userId) { //拿到userid後再發出每個request拿到logo
+
+            let url = "https://api.twitch.tv/helix/users?id=" + userId;
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Client-ID': '6ilotn58vlisw5jwuwqn6mafwgsy86',
+                    'Authorization': 'Bearer z0foe7sls871qt0yhkchlkzbrlxbpf'
+                },
+            }).then((response) => {
+                // 這裡會得到一個 ReadableStream 的物件
+                // 可以透過 blob(), json(), text() 轉成可用的資訊
+                return response.json();
+            }).then((jsonData) => {
+                let logoUrl = jsonData.data[0].profile_image_url.replace('300', '50').replace('300', '50')
+                let allLogoArr = document.querySelectorAll('.logo')
+                allLogoArr[userIdArrPlus].setAttribute('src', logoUrl)
+                userIdArrPlus += 1
+            })
+
+
+            /*      舊的寫法
+                    let xhr = new XMLHttpRequest();
+                        xhr.open('GET', url, true);
+                        xhr.setRequestHeader('Client-ID', '6ilotn58vlisw5jwuwqn6mafwgsy86')
+                        xhr.setRequestHeader('Authorization', 'Bearer z0foe7sls871qt0yhkchlkzbrlxbpf')
+                        xhr.send();
+
+                        xhr.onreadystatechange = function() {
+                            if (this.readyState === 4 && this.status === 200) {
+                                let response = JSON.parse(this.response);
+                                let logoUrl = response.data[0].profile_image_url.replace('300', '50').replace('300', '50')
+                                let allLogoArr = document.querySelectorAll('.logo')
+                                console.log(allLogoArr[userIdArrPlus])
+                                allLogoArr[userIdArrPlus].setAttribute('src', logoUrl)
+                                userIdArrPlus += 1
+                            }
+                        };
+            */
+
+        }
+
+
+        function fetchApi(url) {
+            fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Client-ID': '6ilotn58vlisw5jwuwqn6mafwgsy86',
+                        'Authorization': 'Bearer z0foe7sls871qt0yhkchlkzbrlxbpf'
+                    },
+                })
+                .then((response) => {
+                    // 這裡會得到一個 ReadableStream 的物件
+                    // 可以透過 blob(), json(), text() 轉成可用的資訊
+                    return response.json();
+                }).then((jsonData) => {
+                    const data = jsonData.data
+                    const $row = $(".row");
+
+                    for (i = 0; i < data.length; i++) {
+                        getLogo(data[i].user_id)
+                        $row.append(getColumn(data, i, data[i].user_login))
+                    }
+                }).catch((err) => {
+                    console.log('錯誤:', err);
+                });
+        }
+
+        fetchApi(streamsUrl)
+
+        // loadXml('https://api.twitch.tv/helix/streams?game_id=' +
+        //     gameId,
+        //     '6ilotn58vlisw5jwuwqn6mafwgsy86',
+        //     'Bearer z0foe7sls871qt0yhkchlkzbrlxbpf'
+        // )
+
+
+
+        // getData((obj) => {
+        //     //console.log(obj.data)
+        //     const data = obj.data
+        //     const $row = $(".row");
+
+        //     for (i = 0; i < data.length; i++) {
+        //         //userIdArr.push(data[i].id)
+
+        //         $row.append(getColumn(data, i))
+        //         getLogo(data[i].user_id)
+
+        //     }
+        // })
+
+        /****************以下為無動態新增東西的寫法*******************************/
+
+
+        // function getLogo(userId) {
+        //     const request = new XMLHttpRequest()
+        //     const clientId = '6ilotn58vlisw5jwuwqn6mafwgsy86'
+        //     const Authorization = 'Bearer z0foe7sls871qt0yhkchlkzbrlxbpf'
+
+        //     request.open('GET', 'https://api.twitch.tv/helix/users?id=' + userId, true)
+        //     request.setRequestHeader('Client-ID', clientId)
+        //     request.setRequestHeader('Authorization', Authorization)
+        //     request.send()
+
+
+
+        //     request.onload = function() {
+        //         if (request.status >= 200 && request.status < 400) {
+
+        //             let json = JSON.parse(request.response)
+        //                 //console.log(json)
+        //             let logoUrl = json.data[0].profile_image_url.replace('300', '50').replace('300', '50')
+        //             console.log(typeof(logoUrl))
+        //             return logoUrl
+
+        //         } else {
+        //             console.log('error')
+        //         }
+        //     }
+        // }
+
+
+
+        // function getData() {
+        //     const request = new XMLHttpRequest()
+        //     const clientId = '6ilotn58vlisw5jwuwqn6mafwgsy86'
+        //     const Authorization = 'Bearer z0foe7sls871qt0yhkchlkzbrlxbpf'
+
+        //     request.open('GET', 'https://api.twitch.tv/helix/streams?game_id=21779', true)
+        //     request.setRequestHeader('Client-ID', clientId)
+        //     request.setRequestHeader('Authorization', Authorization)
+        //     request.send()
+
+
+
+        //     request.onload = function() {
+        //         if (request.status >= 200 && request.status < 400) {
+        //             let json = JSON.parse(request.response)
+        //             let preview = document.querySelectorAll(".top img")
+        //             let channelName = document.querySelectorAll(".text .channelName")
+        //             let personName = document.querySelectorAll(".text .personName")
+
+        //             for (let i = 0; i <= 8; i++) {
+        //                 let data = json.data[i]
+        //                 let previewUrl = data.thumbnail_url.replace('{width}', '300').replace('{height}', '169')
+        //                 let channelNameUrl = data.title
+        //                 let personNameUrl = data.user_name
+        //                 let logoId = data.user_id
+        //                 let userId = data.user_id
+
+        //                 preview[i].setAttribute("src", previewUrl)
+        //                 personName[i].innerText = personNameUrl
+        //                 channelName[i].innerText = channelNameUrl
+
+        //                 setLogo(logoId, i)
+        //             }
+        //             //img.setAttribute("src", newUrl)
+
+
+        //         } else {
+        //             console.log('error')
+        //         }
+        //     }
+        // }
+
+        // function setLogo(userId, index) {
+        //     const request = new XMLHttpRequest()
+        //     const clientId = '6ilotn58vlisw5jwuwqn6mafwgsy86'
+        //     const Authorization = 'Bearer z0foe7sls871qt0yhkchlkzbrlxbpf'
+
+        //     request.open('GET', 'https://api.twitch.tv/helix/users?id=' + userId, true)
+        //     request.setRequestHeader('Client-ID', clientId)
+        //     request.setRequestHeader('Authorization', Authorization)
+        //     request.send()
+
+
+
+        //     request.onload = function() {
+        //         if (request.status >= 200 && request.status < 400) {
+        //             let json = JSON.parse(request.response)
+        //             let logo = document.querySelectorAll(".bottom img")
+        //             let logoUrl = json.data[0].profile_image_url.replace('300', '50').replace('300', '50')
+
+        //             logo[index].setAttribute("src", logoUrl)
+        //         } else {
+        //             console.log('error')
+        //         }
+        //     }
+        // }
+        // getData()
+
+        //"data":"id":"21779","name":"League of Legends","box_art_url" LOL的ID
+    </script>
+</body>
+
+</html>
