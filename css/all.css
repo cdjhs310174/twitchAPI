@@ -7,11 +7,16 @@ html {
   height: 100%;
 }
 
-body {
-  background: url("https://lolstatic-a.akamaihd.net/lolkit/1.1.6/resources/images/bg-default.jpg") no-repeat center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: center;
+body:before {
+  content: ' ';
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url("https://lolstatic-a.akamaihd.net/lolkit/1.1.6/resources/images/bg-default.jpg") center 0 no-repeat;
+  background-size: cover;
 }
 
 .burgar_btn {
